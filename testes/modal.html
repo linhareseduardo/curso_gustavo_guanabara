@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+$query = pg_query($dbconn,"select * from table");
+
+<table width="100%" border="1" cellspacing="0" cellpadding="0">
+<thead>
+  <tr>
+    <td align="center" valign="middle">header1</td>
+    <td align="center" valign="middle">header2</td>
+    <td align="center" valign="middle">header3</td>
+  </tr>
+</thead>
+<tbody>
+  <?php while($row = pg_fetch_assoc($query)){ ?>
+  <tr>
+    <td align="center" valign="middle"><?php echo $row_query['value1']; ?></td>
+    <td align="center" valign="middle"><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#<?php echo $row['id']; ?>"><?php echo $row['value2']; ?></button></td>
+    <td align="center" valign="middle"><?php echo $row['value3']; ?></td>
+  </tr>
+    <!-- Modal -->
+    <div class="modal fade" id="<?php echo $row['id']; ?>" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+          </div>
+          <div class="modal-body">
+          <p>This is a small modal.</p>
+          <p><?php echo $row['value10']; ?></p>
+          </div>
+          <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>    
+  <?php } ?>
+</tbody>
+</table>
